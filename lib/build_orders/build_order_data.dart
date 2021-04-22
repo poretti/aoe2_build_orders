@@ -38,35 +38,35 @@ class BuildOrderStep {
   final Age age;
   final String description;
   final String? startTime;
-  final GameData? gameData;
+  final GameData gameData;
   final Map<Resource, int> vilCount;
 
   const BuildOrderStep({
     required this.age,
     required this.description,
     this.startTime,
-    this.gameData,
+    required this.gameData,
     this.vilCount = const {},
   });
 
   const BuildOrderStep.dark({
     required this.description,
     this.startTime,
-    this.gameData,
+    required this.gameData,
     this.vilCount = const {},
   }) : age = Age.Dark;
 
   const BuildOrderStep.feudal({
     required this.description,
     this.startTime,
-    this.gameData,
+    required this.gameData,
     this.vilCount = const {},
   }) : age = Age.Feudal;
 
   const BuildOrderStep.castle({
     required this.description,
     this.startTime,
-    this.gameData,
+    required this.gameData,
     this.vilCount = const {},
   }) : age = Age.Castle;
 }
@@ -82,4 +82,5 @@ enum GameWordType {
   Resource,
   Tech,
   Building,
+  Unit,
 }

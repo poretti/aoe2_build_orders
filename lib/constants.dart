@@ -19,6 +19,8 @@ class Strings {
   static final miningCamp = 'Mining Camp';
   static final barracks = 'Barracks';
   static final archeryRange = 'Archery Range';
+  static final market = 'Market';
+  static final blacksmith = 'Blacksmith';
 
   // Technologies
   static final loom = 'Loom';
@@ -26,4 +28,14 @@ class Strings {
   static final doubleBitAxe = 'Double-Bit Axe';
   static final feudalAge = 'Feudal Age';
   static final castleAge = 'Castle Age';
+
+  // Units
+  static final militia = 'Militia';
+  static final manAtArms = 'Man-at-Arms';
+  static final archers = 'Archers';
+  static final scouts = 'Scouts';
+  static final crossbowmen = 'Crossbowmen';
+  static final knights = 'Knights';
+  static final monks = 'Monks';
+
 }

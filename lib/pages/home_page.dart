@@ -1,17 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-import 'build_orders/build_order_data.dart';
-import 'build_orders/build_orders.dart';
-import 'enums/age.dart';
-import 'enums/difficulty.dart';
-import 'theme_data.dart';
-import 'widgets/game_content_usage_blurb.dart';
-import 'image_hero.dart';
-import 'constants.dart';
+import '../build_orders/build_order_data.dart';
+import '../build_orders/build_orders.dart';
+import '../enums/build_type.dart';
+import '../enums/difficulty.dart';
+import '../widgets/game_content_usage_blurb.dart';
+import '../widgets/build_order_time.dart';
+import '../constants.dart';
+import '../image_hero.dart';
 import 'summary_page.dart';
-import 'enums/build_type.dart';
+import '../theme_data.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/';
@@ -180,41 +179,6 @@ class BuildOrderCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class BuildOrderTime extends StatelessWidget {
-  final String time;
-  final Map<Age, int> ageEndPopCount;
-
-  BuildOrderTime(this.time, this.ageEndPopCount);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Icon(Icons.timer),
-            Text(
-              time,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Icon(Icons.shield),
-            Text(
-              '${ageEndPopCount[Age.Dark]} / ${ageEndPopCount[Age.Feudal]}',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

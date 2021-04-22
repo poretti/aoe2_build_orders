@@ -2,11 +2,12 @@ import 'package:aoe_flash_cards/main.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-import 'build_orders/build_order_data.dart';
-import 'enums/age.dart';
-import 'enums/resource.dart';
-import 'theme_data.dart';
-import 'image_hero.dart';
+import '../build_orders/build_order_data.dart';
+import '../enums/age.dart';
+import '../enums/resource.dart';
+import '../theme_data.dart';
+import '../image_hero.dart';
+import 'drag_n_drop_game.dart';
 
 class BuildOrderSummaryArguments {
   final BuildOrderData bo;
@@ -46,9 +47,8 @@ class BuildOrderSummary extends StatelessWidget {
                 width: 200,
                 child: ElevatedButton(
                   onPressed: () => Navigator.pushNamed(
-                    context,
-                    DragNDropPage.routeName,
-                  ),
+                      context, DragNDropPage.routeName,
+                      arguments: DragNDropPageArguments(bo: bo)),
                   style:
                       ElevatedButton.styleFrom(primary: ColorsExt.polishedPine),
                   child: Text(
@@ -70,7 +70,6 @@ class BuildOrderSummary extends StatelessWidget {
 
   MultiSliver _buildAgeSteps(
       BuildContext context, Age age, List<BuildOrderStep> steps) {
-
     List<Resource> resources = _getResources(steps);
 
     return MultiSliver(
@@ -193,11 +192,12 @@ class BuildOrderSummary extends StatelessWidget {
         child: resource.image);
   }
 
-  Widget _buildListItem(BuildContext context, int i, BuildOrderStep step, List<Resource> resources) {
+  Widget _buildListItem(BuildContext context, int i, BuildOrderStep step,
+      List<Resource> resources) {
     final textTheme = Theme.of(context).textTheme.bodyText1;
 
     Color color = Colors.white;
-    if (i % 2  == 1) {
+    if (i % 2 == 1) {
       color = Colors.grey[100]!;
     }
 
@@ -213,12 +213,13 @@ class BuildOrderSummary extends StatelessWidget {
               child: Text(step.description + time, style: textTheme),
             ),
           ),
-          ...resources.map((r) => // add container per resource for spacing
-            Container(
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                width: 30.0,
-                alignment: AlignmentDirectional.center,
-                child: Text('${step.vilCount[r] ?? ''}', style: textTheme)),
+          ...resources.map(
+            (r) => // add container per resource for spacing
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    width: 30.0,
+                    alignment: AlignmentDirectional.center,
+                    child: Text('${step.vilCount[r] ?? ''}', style: textTheme)),
           ),
         ],
       ),
