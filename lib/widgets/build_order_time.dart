@@ -13,23 +13,47 @@ class BuildOrderTime extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Icon(Icons.timer),
-            Text(
-              time,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ],
+        TimeToComplete(time),
+        PopCount(ageEndPopCount),
+      ],
+    );
+  }
+}
+
+class TimeToComplete extends StatelessWidget {
+  final String time;
+
+  TimeToComplete(this.time);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.timer),
+        Text(
+          time,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
-        Row(
-          children: [
-            Icon(Icons.shield),
-            Text(
-              '${ageEndPopCount[Age.Dark]} / ${ageEndPopCount[Age.Feudal]}',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ],
+      ],
+    );
+  }
+}
+
+class PopCount extends StatelessWidget {
+  final Map<Age, int> ageEndPopCount;
+
+  PopCount(this.ageEndPopCount);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.shield),
+        Text(
+          '${ageEndPopCount[Age.Dark]} / ${ageEndPopCount[Age.Feudal]}',
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ],
     );

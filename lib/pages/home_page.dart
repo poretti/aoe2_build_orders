@@ -174,6 +174,7 @@ class BuildOrderCard extends StatelessWidget {
               child: BuildOrderTime(bo.timeToComplete, bo.ageEndPopCount),
             ),
             Container(
+                width: 60,
                 padding: EdgeInsets.only(right: 8),
                 child: bo.difficulty.widget),
           ],

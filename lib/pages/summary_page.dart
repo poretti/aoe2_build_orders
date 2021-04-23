@@ -1,9 +1,10 @@
-import 'package:aoe_flash_cards/main.dart';
+import 'package:aoe_flash_cards/widgets/build_order_time.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../build_orders/build_order_data.dart';
 import '../enums/age.dart';
+import '../enums/difficulty.dart';
 import '../enums/resource.dart';
 import '../theme_data.dart';
 import '../image_hero.dart';
@@ -128,7 +129,80 @@ class BuildOrderSummary extends StatelessWidget {
               ],
             ),
             Container(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 15),
+              height: 60,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text('Difficulty',
+                            style: Theme.of(context).textTheme.bodyText1),
+                        Container(height: 30, child: bo.difficulty.widget),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Steps (Dark/Feudal)',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.menu_book),
+                            Text(
+                              '${bo.steps[Age.Dark]?.length} / ${bo.steps[Age.Feudal]?.length}',
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 60,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Time to complete',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        TimeToComplete(bo.timeToComplete),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Vil count (Dark/Feudal)',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        PopCount(bo.ageEndPopCount),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               child: Text(
                 bo.description,
                 style: Theme.of(context).textTheme.bodyText1,
