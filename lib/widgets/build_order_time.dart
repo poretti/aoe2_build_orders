@@ -52,7 +52,7 @@ class PopCount extends StatelessWidget {
       children: [
         Icon(Icons.shield),
         Text(
-          '${ageEndPopCount[Age.Dark]} / ${ageEndPopCount[Age.Feudal]}',
+          '${ageEndPopCount[Age.Dark]} | ${ageEndPopCount[Age.Feudal]}',
           style: Theme.of(context).textTheme.bodyText1,
         ),
       ],

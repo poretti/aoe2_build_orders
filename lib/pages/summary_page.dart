@@ -149,15 +149,16 @@ class BuildOrderSummary extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'Steps (Dark/Feudal)',
+                          'Steps (Dark|Feudal)',
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            // Icon(Icons.list_alt_outlined),
                             Icon(Icons.menu_book),
                             Text(
-                              '${bo.steps[Age.Dark]?.length} / ${bo.steps[Age.Feudal]?.length}',
+                              '${bo.steps[Age.Dark]?.length} | ${bo.steps[Age.Feudal]?.length}',
                               style: Theme.of(context).textTheme.bodyText1,
                             ),
                           ],
@@ -191,7 +192,7 @@ class BuildOrderSummary extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'Vil count (Dark/Feudal)',
+                          'Vil count (Dark|Feudal)',
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         PopCount(bo.ageEndPopCount),
