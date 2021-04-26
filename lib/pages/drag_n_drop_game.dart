@@ -263,6 +263,7 @@ List<String> guessOptions(GameWordType type, String include) {
         Strings.archeryRange,
         Strings.market,
         Strings.blacksmith,
+        Strings.townCenter,
       ];
       break;
     case GameWordType.Tech:
@@ -270,6 +271,8 @@ List<String> guessOptions(GameWordType type, String include) {
         Strings.loom,
         Strings.wheelbarrow,
         Strings.doubleBitAxe,
+        Strings.horseCollar,
+        Strings.goldMining,
         Strings.feudalAge,
         Strings.castleAge,
       ];

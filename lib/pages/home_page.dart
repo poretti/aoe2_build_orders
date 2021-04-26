@@ -6,7 +6,7 @@ import '../build_orders/build_orders.dart';
 import '../enums/build_type.dart';
 import '../enums/difficulty.dart';
 import '../widgets/game_content_usage_blurb.dart';
-import '../widgets/build_order_time.dart';
+import '../widgets/summary_widgets.dart';
 import '../constants.dart';
 import '../image_hero.dart';
 import 'summary_page.dart';

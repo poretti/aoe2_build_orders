@@ -1,4 +1,5 @@
-import 'package:aoe_flash_cards/widgets/build_order_time.dart';
+import 'package:aoe_flash_cards/widgets/summary_widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -145,26 +146,10 @@ class BuildOrderSummary extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Steps (Dark|Feudal)',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Icon(Icons.list_alt_outlined),
-                            Icon(Icons.menu_book),
-                            Text(
-                              '${bo.steps[Age.Dark]?.length} | ${bo.steps[Age.Feudal]?.length}',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                    child: StepCountWithHeader({
+                      Age.Dark: bo.steps[Age.Dark]?.length,
+                      Age.Feudal: bo.steps[Age.Feudal]?.length
+                    }),
                   ),
                 ],
               ),
@@ -175,30 +160,8 @@ class BuildOrderSummary extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Time to complete',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        TimeToComplete(bo.timeToComplete),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Vil count (Dark|Feudal)',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        PopCount(bo.ageEndPopCount),
-                      ],
-                    ),
-                  ),
+                  Expanded(child: TimeToCompleteWithHeader(bo.timeToComplete)),
+                  Expanded(child: PopCountWithHeader(bo.ageEndPopCount)),
                 ],
               ),
             ),
@@ -216,8 +179,7 @@ class BuildOrderSummary extends StatelessWidget {
   }
 
   Widget _buildHeader(BuildContext context, Age age, List<Resource> resources) {
-    var color = ColorsExt.pewterBlue;
-
+    Color color;
     switch (age) {
       case Age.Dark:
         color = ColorsExt.honeyYellow[800]!;
@@ -226,10 +188,10 @@ class BuildOrderSummary extends StatelessWidget {
         color = ColorsExt.rust[700]!;
         break;
       case Age.Castle:
-        // TODO: Handle this case.
+        color = Colors.indigo[900]!;
         break;
       case Age.Imperial:
-        // TODO: Handle this case.
+        color = Colors.green[900]!;
         break;
     }
 
@@ -249,10 +211,10 @@ class BuildOrderSummary extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 5),
           ),
           Expanded(
-            child: Center(
-              child:
-                  Text(age.name, style: Theme.of(context).textTheme.headline6),
-            ),
+            child: Container(
+                margin: EdgeInsets.only(left: 25),
+                child: Text(age.name,
+                    style: Theme.of(context).textTheme.headline6)),
           ),
           ...resources.map((r) => _buildResourceImage(r)),
         ],

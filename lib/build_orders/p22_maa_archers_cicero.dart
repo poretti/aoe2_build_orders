@@ -10,7 +10,7 @@ import 'package:aoe_flash_cards/constants.dart';
 
 var p22MaaArchersCicero = BuildOrderData(
   id: 'p22MaaArchersCicero',
-  title: '22p Man-at-Arms into Archers',
+  title: 'Man-at-Arms into Archers',
   author: 'Cicero',
   image: 'assets/units/man-at-arms.png',
   description:
@@ -18,7 +18,7 @@ var p22MaaArchersCicero = BuildOrderData(
       'During the Feudal age you\'ll make a lot of farms, use straggler trees next to your Town Center if a to-be-farmer is waiting for Wood.',
   timeToComplete: '21:30',
   mainType: BuildType.FastFeudal,
-  difficulty: Difficulty.Advanced,
+  difficulty: Difficulty.Intermediate,
   ageEndPopCount: {
     Age.Dark: 22,
     Age.Feudal: 40,
@@ -87,7 +87,7 @@ var p22MaaArchersCicero = BuildOrderData(
         ),
       ),
       BuildOrderStep.dark(
-        description: '2 on Berries',
+        description: '2 on ${Strings.berries}',
         gameData: GameData(
           gameWord: Strings.berries,
           type: GameWordType.Resource,
