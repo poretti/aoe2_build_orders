@@ -20,7 +20,7 @@ var scoutsIntoKnights = BuildOrderData(
       'speed to harass villagers, and then increasing pressure in Castle Age with Knights.',
   timeToComplete: '19:00',
   mainType: BuildType.FastFeudal,
-  difficulty: Difficulty.Advanced,
+  difficulty: Difficulty.Intermediate,
   ageEndPopCount: {
     // Includes Scout
     Age.Dark: 21, // 20 vils

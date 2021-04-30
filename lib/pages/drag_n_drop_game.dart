@@ -71,7 +71,7 @@ class _DragNDropGameState extends State<DragNDropGame>
     TextStyle bigTextStyle =
         Theme.of(context).textTheme.bodyText1!.apply(fontSizeFactor: 2);
 
-    if (finished) _finishedGame(bigTextStyle);
+    if (finished) return _finishedGame(bigTextStyle);
 
     return GestureDetector(
       // We make the whole page swipe-able to continue the game.
@@ -122,9 +122,12 @@ class _DragNDropGameState extends State<DragNDropGame>
   }
 
   Widget dragTargetQuestion(TextStyle textStyle) {
-    // We've already ensured this step and game data exists
     String gameWord = step.gameData.gameWord;
-    String phrase = step.description.replaceAll(gameWord, blankWord);
+
+    // This is basically a hack to keep the blank roughly the same size as the
+    // right answer. This helps prevent the text from shifting around.
+    String gameWordBlank = '_' * (gameWord.length + 1);
+    String phrase = step.description.replaceAll(gameWord, gameWordBlank);
 
     return DragTarget<String>(
       builder: (
@@ -241,10 +244,10 @@ class _DragNDropGameState extends State<DragNDropGame>
 /// Returns 4 strings of the same GameWordType, one of which is `include`.
 /// This determines the 4 guess options on the game screen.
 List<String> guessOptions(GameWordType type, String include) {
-  List<String> options;
+  Set<String> options;
   switch (type) {
     case GameWordType.Resource:
-      options = [
+      options = {
         Strings.sheep,
         Strings.boar,
         Strings.berries,
@@ -252,10 +255,10 @@ List<String> guessOptions(GameWordType type, String include) {
         Strings.wood,
         Strings.gold,
         Strings.stone,
-      ];
+      };
       break;
     case GameWordType.Building:
-      options = [
+      options = {
         Strings.mill,
         Strings.lumberCamp,
         Strings.miningCamp,
@@ -264,10 +267,10 @@ List<String> guessOptions(GameWordType type, String include) {
         Strings.market,
         Strings.blacksmith,
         Strings.townCenter,
-      ];
+      };
       break;
     case GameWordType.Tech:
-      options = [
+      options = {
         Strings.loom,
         Strings.wheelbarrow,
         Strings.doubleBitAxe,
@@ -275,10 +278,13 @@ List<String> guessOptions(GameWordType type, String include) {
         Strings.goldMining,
         Strings.feudalAge,
         Strings.castleAge,
-      ];
+        Strings.bloodlines,
+        Strings.scaleBardingArmor,
+        Strings.fletching,
+      };
       break;
     case GameWordType.Unit:
-      options = [
+      options = {
         Strings.militia,
         Strings.manAtArms,
         Strings.archers,
@@ -286,15 +292,17 @@ List<String> guessOptions(GameWordType type, String include) {
         Strings.crossbowmen,
         Strings.knights,
         Strings.monks,
-      ];
+      };
       break;
   }
 
-  options
+  var optionsList = options.toList();
+
+  optionsList
     ..remove(include) // Remove correct answer from options.
     ..shuffle(); // Randomize wrong answers.
 
-  return options.sublist(0, 3) // Choose just 3 wrong answers.
+  return optionsList.sublist(0, 3) // Choose just 3 wrong answers.
     ..add(include) // Add correct answer back in.
     ..shuffle(); // Reshuffle so the correct answer isn't always at the end :P
 }

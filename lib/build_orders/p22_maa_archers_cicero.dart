@@ -18,7 +18,7 @@ var p22MaaArchersCicero = BuildOrderData(
       'During the Feudal age you\'ll make a lot of farms, use straggler trees next to your Town Center if a to-be-farmer is waiting for Wood.',
   timeToComplete: '21:30',
   mainType: BuildType.FastFeudal,
-  difficulty: Difficulty.Intermediate,
+  difficulty: Difficulty.Advanced,
   ageEndPopCount: {
     Age.Dark: 22,
     Age.Feudal: 40,

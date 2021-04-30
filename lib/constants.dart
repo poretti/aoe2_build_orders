@@ -34,6 +34,7 @@ class Strings {
   static final castleAge = 'Castle Age';
   static final bloodlines = 'Bloodlines';
   static final scaleBardingArmor = 'Scale Barding Armor';
+  static final fletching = 'Fletching';
 
   // Units
   static final militia = 'Militia';
