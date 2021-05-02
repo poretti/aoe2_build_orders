@@ -54,7 +54,7 @@ class BuildOrderSummary extends StatelessWidget {
                   style:
                       ElevatedButton.styleFrom(primary: ColorsExt.polishedPine),
                   child: Text(
-                    'Start Memory Game',
+                    'Build Order Test',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
