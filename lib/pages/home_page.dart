@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
       child: CustomScrollView(
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         slivers: [
-          _buildSliverAppBar(),
+          _buildSliverAppBar(context),
           ..._buildGroups(),
           SliverFillRemaining(
             child: GameContentUsageRules(appName),
@@ -57,14 +57,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  SliverAppBar _buildSliverAppBar() {
+  SliverAppBar _buildSliverAppBar(BuildContext context) {
+    double height = MediaQuery.of(context).size.width < 700 ? 180 : 280;
+
     return SliverAppBar(
       pinned: true, // Keep appbar always visible.
       snap: false,
       floating: false, // Don't expose appbar when scrolling up.
       stretch: true,
       primary: true,
-      expandedHeight: 180,
+      expandedHeight: height,
       backgroundColor: Colors.grey[850],
       flexibleSpace: FlexibleSpaceBar(
         stretchModes: [
@@ -128,8 +130,17 @@ class BuildOrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final wideScreen = MediaQuery.of(context).size.width > 700;
+
+    double cardMarginMultiplier = wideScreen ? 2 : 1;
+    double margin = wideScreen ? 20 : 0;
+
     return Card(
-      margin: EdgeInsets.only(top: 0, left: 8, right: 8, bottom: 5),
+      margin: EdgeInsets.only(
+          top: 0,
+          left: 8 * cardMarginMultiplier,
+          right: 8 * cardMarginMultiplier,
+          bottom: 5 * cardMarginMultiplier),
       elevation: 0,
       child: InkWell(
         onTap: () => Navigator.pushNamed(
@@ -144,6 +155,7 @@ class BuildOrderCard extends StatelessWidget {
           children: [
             Container(
               width: 60,
+              margin: EdgeInsets.symmetric(horizontal: margin),
               padding: EdgeInsets.only(left: 8),
               child: BuildOrderHero(
                 photo: bo.image,
@@ -170,11 +182,13 @@ class BuildOrderCard extends StatelessWidget {
               ),
             ),
             Container(
+              margin: EdgeInsets.symmetric(horizontal: margin),
               alignment: AlignmentDirectional.center,
               child: BuildOrderTime(bo.timeToComplete, bo.ageEndPopCount),
             ),
             Container(
                 width: 60,
+                margin: EdgeInsets.symmetric(horizontal: margin),
                 padding: EdgeInsets.only(right: 8),
                 child: bo.difficulty.widget),
           ],

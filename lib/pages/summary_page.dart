@@ -93,6 +93,10 @@ class BuildOrderSummary extends StatelessWidget {
   }
 
   Widget _buildOverview(BuildContext context, BuildOrderData bo) {
+    double imageMultiplier = MediaQuery.of(context).size.width < 600
+        ? 1
+        : MediaQuery.of(context).size.width / 600;
+
     return SliverToBoxAdapter(
       child: Container(
         decoration: UnderlineTabIndicator(
@@ -105,7 +109,7 @@ class BuildOrderSummary extends StatelessWidget {
               children: [
                 Container(
                   padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                  width: 110,
+                  width: 110 * imageMultiplier,
                   child: BuildOrderHero(
                     photo: bo.image,
                     id: bo.id,
@@ -216,21 +220,25 @@ class BuildOrderSummary extends StatelessWidget {
                 child: Text(age.name,
                     style: Theme.of(context).textTheme.headline6)),
           ),
-          ...resources.map((r) => _buildResourceImage(r)),
+          ...resources.map((r) => _buildResourceImage(context, r)),
         ],
       ),
     );
   }
 
-  Widget _buildResourceImage(Resource resource) {
+  Widget _buildResourceImage(BuildContext context, Resource resource) {
+    double margin = MediaQuery.of(context).size.width < 700 ? 5 : 15;
+
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 5.0),
+        margin: EdgeInsets.symmetric(horizontal: margin),
         width: 30.0,
         child: resource.image);
   }
 
   Widget _buildListItem(BuildContext context, int i, BuildOrderStep step,
       List<Resource> resources) {
+    double resourceMargin = MediaQuery.of(context).size.width < 700 ? 5 : 15;
+
     final textTheme = Theme.of(context).textTheme.bodyText1;
 
     Color color = Colors.white;
@@ -253,7 +261,7 @@ class BuildOrderSummary extends StatelessWidget {
           ...resources.map(
             (r) => // add container per resource for spacing
                 Container(
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    margin: EdgeInsets.symmetric(horizontal: resourceMargin),
                     width: 30.0,
                     alignment: AlignmentDirectional.center,
                     child: Text('${step.vilCount[r] ?? ''}', style: textTheme)),
