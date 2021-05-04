@@ -50,9 +50,6 @@ flutter:
   assets:
     - assets/
     - assets/ages/
-    - assets/backgrounds/
-    - assets/buttons/
-    - assets/civs/
     - assets/difficulties/
     - assets/resources/
     - assets/units/
