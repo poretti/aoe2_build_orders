@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../theme_data.dart';
 import '../constants.dart';
@@ -48,8 +49,6 @@ class DragNDropGame extends StatefulWidget {
 
 class _DragNDropGameState extends State<DragNDropGame>
     with SingleTickerProviderStateMixin {
-  static final blankWord = '______';
-
   BuildOrderData buildOrder;
 
   late BuildOrderStep step;
@@ -95,20 +94,7 @@ class _DragNDropGameState extends State<DragNDropGame>
                 ),
                 Expanded(
                   flex: 2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          draggableOption(options.elementAt(0)),
-                          draggableOption(options.elementAt(1)),
-                          draggableOption(options.elementAt(2)),
-                          draggableOption(options.elementAt(3)),
-                        ],
-                      ),
-                    ],
-                  ),
+                  child: dragOptions(),
                 ),
               ],
             ),
@@ -168,6 +154,42 @@ class _DragNDropGameState extends State<DragNDropGame>
       // Only accept if they haven't gotten the right answer yet.
       onWillAccept: (String? word) => guessedRight != true,
     );
+  }
+
+  Widget dragOptions() {
+    return OrientationBuilder(builder: (context, orientation) {
+      if (orientation == Orientation.portrait) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            draggableOption(options.elementAt(0)),
+            draggableOption(options.elementAt(1)),
+            draggableOption(options.elementAt(2)),
+            draggableOption(options.elementAt(3)),
+          ],
+        );
+      }
+
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              draggableOption(options.elementAt(0)),
+              draggableOption(options.elementAt(1)),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              draggableOption(options.elementAt(2)),
+              draggableOption(options.elementAt(3)),
+            ],
+          ),
+        ],
+      );
+    });
   }
 
   Widget draggableOption(String word) {
